@@ -26,4 +26,5 @@ For guides like installation etc. you can look to wiki.
 ## Schematic of iPod
 The schematic below shows the most important hardware components of the iPod Touch 2G and their interactions.
 The schematic for the iPod Touch 1G is mostly similar.
+
 <img width="936" height="575" alt="image" src="https://github.com/user-attachments/assets/2963e924-e619-40c3-ac80-eaddfd905525" />
