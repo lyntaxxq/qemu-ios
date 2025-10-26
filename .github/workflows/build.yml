@@ -13,17 +13,18 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Clone qemu-ios
+      - name: Clone qemu-ios repository
         run: |
           git clone https://github.com/devos50/qemu-ios.git
           cd qemu-ios
           git submodule update --init
 
-      - name: Install dependencies (Homebrew)
+      - name: Install dependencies (Homebrew and Python)
         run: |
-          brew install glib ninja pixman pkg-config sdl2 openssl@3
+          brew install sdl2
+          pip3 install distlib --break-system-packages
 
-      - name: Build qemu-ios
+      - name: Build qemu-ios and move it to correct folder
         run: |
           cd qemu-ios
           mkdir build
