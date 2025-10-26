@@ -1,0 +1,47 @@
+name: Build qemu-ios
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Clone qemu-ios repository
+        run: |
+          git clone https://github.com/devos50/qemu-ios.git
+          cd qemu-ios
+          git submodule update --init
+
+      - name: Install dependencies for Linux
+        run: |
+          sudo apt update
+          sudo apt install -y make ninja-build pkg-config libssl-dev libsdl2-dev libpixman-1-dev libpixman-1-0 libglib2.0-dev
+
+      - name: Build qemu-ios and move it to correct folder
+        run: |
+          cd qemu-ios
+          mkdir build
+          cd build
+          ../configure --enable-sdl --disable-cocoa --target-list=arm-softmmu --disable-capstone --disable-slirp --extra-cflags=-I/usr/include/openssl --extra-ldflags='-lcrypto' --disable-werror --enable-pie
+          make -j$(nproc)
+          cd ..
+          sudo mv build ..
+          cd ..
+          sudo rm -rf qemu-ios
+
+      - name: Create zip that includes build folder
+        run: |
+          zip -r build.zip build
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: qemu-ios-build
+          path: build.zip
