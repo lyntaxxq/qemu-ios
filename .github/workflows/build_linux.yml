@@ -1,4 +1,4 @@
-name: Build qemu-ios
+name: Build QEMU-iOS for Debian-based Linux
 
 on:
   push:
