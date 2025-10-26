@@ -19,10 +19,14 @@ jobs:
           cd qemu-ios
           git submodule update --init
 
-      - name: Install dependencies (Homebrew and Python)
+      - name: Install dependencies and export something
         run: |
-          brew install sdl2 gcc make
+          export PKG_CONFIG_PATH="/usr/local/opt/openssl@3/lib/pkgconfig"
+          export LDFLAGS="-L/usr/local/opt/openssl@3/lib"
+          export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
+          brew install glib ninja pkg-config sdl2 openssl@3 meson
           pip3 install distlib --break-system-packages
+          xcode-select --install
 
       - name: Build qemu-ios and move it to correct folder
         run: |
