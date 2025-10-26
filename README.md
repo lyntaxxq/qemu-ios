@@ -5,15 +5,26 @@ This repository is an updated version of QEMU-iOS. Not updated the emulator, jus
 
 ## ✅ Status of project
 
+| Symbol | Meaning      |
+|:------:|:------------:|
+| ✅     | Working good |
+| ⚠️     | Problematic |
+| ❌     | Not Working |
+| ❔     |  Not Tested  |
+
 | Feature            | Description    | State |
 |:-------------------|:---------------|:-----:|
+| Display            |                | ✅    |
 | Booting            |                | ✅    |
 | Buttons            |                | ✅    |
-| Apps               |                | ✅    |
+| Storage            |                | ✅    |
+| SSH/TTY            |                | ⚠️    |
 | WiFi               |                | ❌    |
 | Bluetooth          |                | ❌    |
 | QE/CI              |                | ❌    |
-
+| Audio              |                | ❌    |
+| Power Management   |                | ❌    |
+| Touch              |                | ⚠️    |
 
 ## Device and iOS Version
 Currently we are only supporting iPod Touch 1st Gen and 2nd Gen.
