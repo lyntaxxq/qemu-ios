@@ -1,40 +1,48 @@
-name: Build QEMU-iOS on macOS
+name: Build QEMU-iOS for Intel Mac
 
 on:
   push:
-    branches:
-      - main
+  pull_request:
   workflow_dispatch:
 
 jobs:
-  build-qemu-ios:
-    runs-on: macos-13
+  build-macos:
+    runs-on: macos-15
+    if: runner.arch == 'X64'
+
     steps:
-      # 1. Checkout the repository
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # 2. Install dependencies via Homebrew
-      - name: Install dependencies
-        run: |
-          brew update
-          brew install glib ninja pixman pkg-config sdl2 openssl@3
-
-      # 3. Clone the qemu-ios repository
       - name: Clone qemu-ios
         run: |
           git clone https://github.com/devos50/qemu-ios.git
           cd qemu-ios
+          git submodule update --init
+
+      - name: Install dependencies (Homebrew)
+        run: |
+          brew install glib ninja pixman pkg-config sdl2 openssl@3
+
+      - name: Build qemu-ios
+        run: |
+          cd qemu-ios
           mkdir build
           cd build
           ../configure --target-list=arm-softmmu \
-                       --extra-cflags=-I/usr/local/opt/openssl@3/include \
-                       --extra-ldflags='-L/usr/local/opt/openssl@3/lib -lcrypto'
-          make -j32
+            --extra-cflags=-I/usr/local/opt/openssl@3/include \
+            --extra-ldflags='-L/usr/local/opt/openssl@3/lib -lcrypto'
+          make -j$(sysctl -n hw.logicalcpu)
+          cd ..
+          sudo mv build ..
+          cd ..
+          sudo rm -rf qemu-ios
 
-      # 4. Upload qemu-ios folder as an artifact
-      - name: Upload qemu-ios build
+      - name: Zip build folder
+        run: zip -r build-macos.zip build
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: qemu-ios-build
-          path: qemu-ios
+          name: qemu-ios-build-macos
+          path: build-macos.zip
