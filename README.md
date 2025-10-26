@@ -9,8 +9,11 @@ This repository is an updated version of QEMU-iOS. Not updated the emulator, jus
 |:-------------------|:---------------|:-----:|
 | Booting            |                | ✅    |
 | Buttons            |                | ✅    |
+| Apps               |                | ✅    |
+| WiFi               |                | ❌    |
+| Bluetooth          |                | ❌    |
 | QE/CI              |                | ❌    |
-TODO: Add more status.
+
 
 ## Device and iOS Version
 Currently we are only supporting iPod Touch 1st Gen and 2nd Gen.
@@ -18,7 +21,7 @@ Currently we are only supporting iPod Touch 1st Gen and 2nd Gen.
 - iPod Touch 2nd Gen have iPhoneOS 2.0 in emulator.
 
 ## Limitations
-- Storage limited to 256MB.
-- No WiFi (service starts but phone can't understand what's going with WiFi).
-- No Fruit Pay.
-TODO: Add more.
+- Storage limited to 256MB. You can download new nand which is 512MB.
+
+## Guides
+For guides like installation etc. you can look to wiki.
