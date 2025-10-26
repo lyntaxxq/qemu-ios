@@ -26,7 +26,6 @@ jobs:
           export CPPFLAGS="-I/usr/local/opt/openssl@3/include"
           brew install glib ninja pkg-config sdl2 openssl@3 meson
           pip3 install distlib --break-system-packages
-          xcode-select --install
 
       - name: Build qemu-ios and move it to correct folder
         run: |
