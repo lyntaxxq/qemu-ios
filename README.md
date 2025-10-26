@@ -1,4 +1,4 @@
-<img width="661" height="1035" alt="image" src="https://github.com/user-attachments/assets/cc21bf0f-dd4e-43e6-96a5-a341cc9644a1" />
+<img width="331" alt="it2g-qemu" src="https://github.com/devos50/qemu-ios/assets/1707075/9bf7f6c1-5918-47e9-bb3e-2e39ae15d519">
 
 # QEMU-iOS
 This repository is an updated version of QEMU-iOS. Not updated the emulator, just simplified the repository.
