@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies (Homebrew and Python)
         run: |
-          brew install sdl2
+          brew install sdl2 gcc make
           pip3 install distlib --break-system-packages
 
       - name: Build qemu-ios and move it to correct folder
